@@ -67,35 +67,7 @@
 {{ partial "cta.html" . }}
 {{ end }}
 
-<!-- material -->
-{{ if .Site.Data.homepage.material.enable }}
-{{ with .Site.Data.homepage.material }}
-<section class="section pb-0">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 mx-auto text-center">
-        <h2>{{ .title | markdownify }}</h2>
-        <p>{{ .subtitle | markdownify }}</p>
-      </div>
-    </div>
-    <div class="row">
-      {{ range .materialItem }}
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="card border-0 text-center">
-          <img src="{{ .image | absURL }}" alt="material" class="card-img-top border-0">
-          <div class="card-body">
-            <h4>{{ .title | markdownify }}</h4>
-            <p>{{ .content | markdownify }}</p>
-          </div>
-        </div>
-      </div>
-      {{ end }}
-    </div>
-  </div>
-</section>
-{{ end }}
-{{ end }}
-<!-- /material -->
+
 
 <!-- advantage -->
 {{ if .Site.Data.homepage.advantage.enable }}
@@ -122,6 +94,35 @@
 {{ end }}
 <!-- /advantage -->
 
+<!-- material -->
+{{ if .Site.Data.homepage.material.enable }}
+{{ with .Site.Data.homepage.material }}
+<section class="section pb-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mx-auto text-center">
+        <h2>{{ .title | markdownify }}</h2>
+        <p>{{ .subtitle | markdownify }}</p>
+      </div>
+    </div>
+    <div class="row">
+      {{ range .materialItem }}
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card border-0 text-center">
+          <div class="card-body">
+            <h4>{{ .title | markdownify }}</h4>
+            <p>{{ .content | markdownify }}</p>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+<!-- /material -->
+
 <!-- promo video -->
 {{ if .Site.Data.homepage.video.enable }}
 {{ with .Site.Data.homepage.video }}
@@ -130,7 +131,9 @@
     <div class="row align-items-center justify-content-between">
       <div class="col-lg-5 col-md-6">
         <div class="img-border rounded mb-5 mb-md-0">
+	  <img src="{{ .image | absURL}}" class="img-fluid" alt="">
           <img src="{{ .videoThumb | absURL }}" alt="video thumb" class="img-fluid rounded">
+
           <a data-toggle="modal" data-src="{{ .videoURL | safeURL }}" data-target="#videoModal2"
             class="text-color video-modal content-center"><i class="ti-control-play bg-gradient btn-play-lg"></i></a>
           <!-- Modal -->
@@ -156,17 +159,17 @@
 {{ end }}
 <!-- /promo video -->
 
-<!-- products -->
-{{ if .Site.Data.homepage.products.enable }}
+<!-- facilitators -->
+{{ if .Site.Data.homepage.facilitators.enable }}
 <section class="section pb-0">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-4">
-        {{ with .Site.Data.homepage.products }}
+        {{ with .Site.Data.homepage.facilitators }}
         <h2>{{ .title | markdownify }}</h2>
         {{ end }}
       </div>
-      {{ range first 6 (where .Site.RegularPages "Type" "products") }}
+      {{ range first 9 (where .Site.RegularPages "Type" "facilitators") }}
       <div class="col-lg-4 col-sm-6 mb-4">
         <div class="card border-0 text-center">
           <a href="{{ .Permalink }}">
@@ -177,15 +180,6 @@
           <div class="card-body">
             <a href="{{ .Permalink }}" class="h4">{{ .Title }}</a>
             <p>{{ .Params.Description }}</p>
-            <div class="mb-4">
-              <span class="lead text-primary">{{ .Params.Price }}</span>
-              <s>{{ .Params.PriceBefore }}</s>
-            </div>
-            <button class="snipcart-add-item btn btn-sm btn-outline-primary" data-item-id="{{ .Params.ProductID }}"
-              data-item-name="{{ .Title }}" {{ range first 1 .Params.Images }} data-item-image="{{ .image | absURL }}"
-              {{ end }} data-item-price="{{ .Params.Price }}" data-item-url="{{ .Permalink }}">
-              Add to cart
-            </button>
           </div>
         </div>
       </div>
@@ -194,44 +188,8 @@
   </div>
 </section>
 {{ end }}
-<!-- /products -->
+<!-- /facilitators -->
 
-<!-- testimonial -->
-{{ if .Site.Data.homepage.testimonial.enable }}
-{{ with .Site.Data.homepage.testimonial }}
-<section class="section">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2>{{ .title | markdownify }}</h2>
-      </div>
-    </div>
-    <div class="row testimonial-slider">
-      {{ range .testimonialItem }}
-      <div class="col-4">
-        <div class="card border-primary text-center">
-          <div class="card-body">
-            <img src="{{ .image | absURL }}" class="client-img" alt="{{ .name | markdownify }}">
-            <p class="quoted">{{ .content | markdownify }}</p>
-            <h6 class="font-weight-medium">{{ .name | markdownify }}</h6>
-            <small>{{ .designation | markdownify }}</small>
-            <ul class="list-inline rating {{ .rating | lower }} mt-3">
-              <li class="list-inline-item mx-0"><i class="ti-star"></i></li>
-              <li class="list-inline-item mx-0"><i class="ti-star"></i></li>
-              <li class="list-inline-item mx-0"><i class="ti-star"></i></li>
-              <li class="list-inline-item mx-0"><i class="ti-star"></i></li>
-              <li class="list-inline-item mx-0"><i class="ti-star"></i></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      {{ end }}
-    </div>
-  </div>
-</section>
-{{ end }}
-{{ end }}
-<!-- /testimonial -->
 
 {{ if .Site.Data.homepage.cta.enable }}
 {{ partial "cta.html" . }}
